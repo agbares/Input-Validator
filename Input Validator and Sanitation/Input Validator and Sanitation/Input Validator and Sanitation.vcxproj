@@ -147,6 +147,7 @@
     <ClInclude Include="Flag.h" />
     <ClInclude Include="InvalidFlagExcep.h" />
     <ClInclude Include="InvalidInputExcep.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Validator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

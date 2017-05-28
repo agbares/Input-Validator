@@ -14,27 +14,6 @@
 	The class has the following properties that should be initialized:
 
 		std::string userPrompt -- The text that will be displayed to prompt the user for input
-			The Validator can only have either userPrompt or userMenu, not both.
-
-		std::vector userMenu -- The menu that will be displayed to prompt the user for selection. 
-			The Validator can only have either userPrompt or userMenu, not both.
-			FORMAT:
-						userMenu[0] - Should hold the text that will be displayed to prompt the user for input
-						userMenu[n] - (Where n > 0) Should hold the text for the nth menu item 
-			
-			Example:
-						userMenu[0] - "Please select one of the following food from the menu."
-						userMenu[1] - "Apple"
-						userMenu[2] - "Orange"
-						userMenu[3] - "Steak"
-						userMenu[4] - "Fried Chicken"
-
-			Example Output: (The function that outputs the menu will automatically add the numbering sequence)
-						Please select one of the following food from the menu.
-						1) Apple
-						2) Orange
-						3) Steak
-						4) Fried Chicken
 
 		std::string invalidPrompt -- The text that will be displayed whenever the user enters an invalid input
 		
@@ -56,7 +35,6 @@
 */
 
 #pragma once
-#pragma warning( disable : 4290 )
 
 #include <iostream>
 #include <string>
@@ -65,7 +43,8 @@
 #include "InvalidFlagExcep.h"
 #include "InvalidInputExcep.h"
 
-namespace AGB {
+namespace AGB 
+{
 
 	template <class type>
 	class Validator
@@ -90,19 +69,25 @@ namespace AGB {
 
 	public:
 		// Constructors
+		Validator();
 		Validator(std::string, std::string);
 		Validator(std::string, std::string, bool, bool);
 		Validator(std::string, std::string, type, Flag);
 		Validator(std::string, std::string, type, Flag, bool, bool);
 
-		Validator(std::vector<std::string>, std::string);
-		Validator(std::vector<std::string>, std::string, bool, bool);
-		Validator(std::vector<std::string>, std::string, type, Flag);
-		Validator(std::vector<std::string>, std::string, type, Flag, bool, bool);
-
-		// Setters for prompts
+		// Mutators
 		void setUserPrompt(std::string);
 		void setInvalidPrompt(std::string);
+		void setIsValid(bool);
+		void setWillPause(bool);
+		void setWillClear(bool);
+
+		// Accessors
+		std::string getUserPrompt();
+		std::string getInvalidPrompt();
+		bool getIsValid();
+		bool getWillPause();
+		bool getWillClear();
 
 		type getInput(); // Helper function which calls Validator::promptUser()
 
@@ -112,70 +97,41 @@ namespace AGB {
 
 	// MARK: -- Constructors
 	template <class type>
-	Validator<type>::Validator(std::string inPrompt, std::string inInvalidPrompt)
+	Validator<type>::Validator()
 	{
-		userPrompt = inPrompt;
+		userPrompt = "";
+		invalidPrompt = "";
+	}
+
+	template <class type>
+	Validator<type>::Validator(std::string inUserPrompt, std::string inInvalidPrompt)
+	{
+		userPrompt = inUserPrompt;
 		invalidPrompt = inInvalidPrompt;
 	}
 
 	template <class type>
-	Validator<type>::Validator(std::string inPrompt, std::string inInvalidPrompt, bool inWillPause, bool inWillClear)
+	Validator<type>::Validator(std::string inUserPrompt, std::string inInvalidPrompt, bool inWillPause, bool inWillClear)
 	{
-		userPrompt = inPrompt;
-		invalidPrompt = inInvalidPrompt;
-		willPause = inWillPause;
-		willClear = inWillClear;
-	}
-
-	template <class type>
-	Validator<type>::Validator(std::string inPrompt, std::string inInvalidPrompt, type inComparator, Flag inCFlag)
-	{
-		userPrompt = inPrompt;
-		invalidPrompt = inInvalidPrompt;
-		comparator = inComparator;
-		cFlag = inCFlag;
-	}
-
-	template <class type>
-	Validator<type>::Validator(std::string inPrompt, std::string inInvalidPrompt, type inComparator, Flag inCFlag, bool inWillPause, bool inWillClear)
-	{
-		userPrompt = inPrompt;
-		invalidPrompt = inInvalidPrompt;
-		willPause = inWillPause;
-		willClear = inWillClear;
-		comparator = inComparator;
-		cFlag = inCFlag;
-	}
-
-	template <class type>
-	Validator<type>::Validator(std::vector<std::string> inUserMenu, std::string inInvalidPrompt)
-	{
-		userMenu = inUserMenu;
-		invalidPrompt = inInvalidPrompt;
-	}
-
-	template <class type>
-	Validator<type>::Validator(std::vector<std::string> inUserMenu, std::string inInvalidPrompt, bool inWillPause, bool inWillClear)
-	{
-		userMenu = inUserMenu;
+		userPrompt = inUserPrompt;
 		invalidPrompt = inInvalidPrompt;
 		willPause = inWillPause;
 		willClear = inWillClear;
 	}
 
 	template <class type>
-	Validator<type>::Validator(std::vector<std::string> inUserMenu, std::string inInvalidPrompt, type inComparator, Flag inCFlag)
+	Validator<type>::Validator(std::string inUserPrompt, std::string inInvalidPrompt, type inComparator, Flag inCFlag)
 	{
-		userMenu = inUserMenu;
+		userPrompt = inUserPrompt;
 		invalidPrompt = inInvalidPrompt;
 		comparator = inComparator;
 		cFlag = inCFlag;
 	}
 
 	template <class type>
-	Validator<type>::Validator(std::vector<std::string> inUserMenu, std::string inInvalidPrompt, type inComparator, Flag inCFlag, bool inWillPause, bool inWillClear)
+	Validator<type>::Validator(std::string inUserPrompt, std::string inInvalidPrompt, type inComparator, Flag inCFlag, bool inWillPause, bool inWillClear)
 	{
-		userMenu = inUserMenu;
+		userPrompt = inUserPrompt;
 		invalidPrompt = inInvalidPrompt;
 		willPause = inWillPause;
 		willClear = inWillClear;
@@ -190,24 +146,7 @@ namespace AGB {
 	{
 		do
 		{
-
-			if (!userMenu.empty())
-			{
-
-				int index;
-
-				for (auto it = userMenu.cbegin(); it != userMenu.cend(); it++)
-				{
-					index = std::distance(userMenu.cbegin(), it);
-
-					if (index > 0)
-						std::cout << index << ") " << *it << std::endl;
-					else
-						std::cout << *it << endl;
-				}
-			}
-			else
-				std::cout << userPrompt << endl;
+			std::cout << userPrompt << endl;
 
 			std::cin >> input;
 
@@ -225,7 +164,7 @@ namespace AGB {
 
 				isValid = false;
 			}
-			else if (cFlag != Flag::NONE && userMenu.empty())
+			else if (cFlag != Flag::NONE)
 			{
 				if (cFlag == Flag::LESSTHAN && input < comparator)
 					isValid = true;
@@ -242,35 +181,71 @@ namespace AGB {
 				else
 					isValid = false;
 			}
-			else if (!userMenu.empty() && (input < 1 || input > userMenu.size() - 1))
-			{
-				std::cout << invalidPrompt << std::endl;
-
-				if (willPause == true)
-					std::system("pause");
-
-				if (willClear == true)
-					std::system("cls");
-
-				isValid = false;
-			}
 			else
 				isValid = true;
 
 		} while (!isValid);
 	}
 
-	// MARK: -- Pubic Methods
+	// MARK: -- Mutators
 	template <class type>
-	void Validator<type>::setUserPrompt(std::string inPrompt)
+	void Validator<type>::setUserPrompt(std::string inUserPrompt)
 	{
-		userPrompt = inPrompt;
+		userPrompt = inUserPrompt;
 	}
 
 	template <class type>
 	void Validator<type>::setInvalidPrompt(std::string inInvalidPrompt)
 	{
 		invalidPrompt = inInvalidPrompt;
+	}
+
+	template <class type>
+	void Validator<type>::setIsValid(bool inIsValid)
+	{
+		isValid = inIsValid;
+	}
+	
+	template <class type>
+	void Validator<type>::setWillPause(bool inWillPause)
+	{
+		willPause = inWillPause;
+	}
+	template <class type>
+	void Validator<type>::setWillClear(bool inWillClear)
+	{
+		willClear = inWillClear;
+	}
+
+	// Mark: -- Accessors
+	template <class type>
+	std::string Validator<type>::getUserPrompt()
+	{
+		return userPrompt;
+	}
+
+	template <class type>
+	std::string Validator<type>::getInvalidPrompt()
+	{
+		return invalidPrompt;
+	}
+
+	template <class type>
+	bool Validator<type>::getIsValid()
+	{
+		return isValid;
+	}
+
+	template <class type>
+	bool Validator<type>::getWillPause()
+	{
+		return willPause;
+	}
+
+	template <class type>
+	bool Validator<type>::getWillClear()
+	{
+		return willClear;
 	}
 
 	template <class type>
