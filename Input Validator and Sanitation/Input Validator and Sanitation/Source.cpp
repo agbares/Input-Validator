@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 
-#include "Validator.h"
 #include "Menu.h"
 #include "Flag.h"
 
@@ -20,7 +19,7 @@ int main()
 	menu.push_back("Steak");
 	menu.push_back("Fried Chicken");
 
-	AGB::Menu inputSelection(menu, "\n\t**Invalid Input**\n");
+	Validator::Menu inputSelection(menu, "\n\t**Invalid Input**\n");
 
 	//AGB::Validator<int> inputSelection(menu, "\n\t**Invalid Input**\n");
 	selection = inputSelection.getInput();

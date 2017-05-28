@@ -1,4 +1,4 @@
-// Validator class -- Specification & Implementation
+// Input class -- Specification & Implementation
 // 
 // This is an ADT class to work with the primitive datatypes and the std::string class
 // for doing input validation. Objects should NOT be initialized to use any other 
@@ -26,11 +26,11 @@
 			DEFAULT VALUE: true
 
 		type comparator -- Value that will be used to compare against the user's input. 
-			IS OPTIONAL IF a Validator object is initialized without a comparator nor flag value.
+			IS OPTIONAL IF a Input object is initialized without a comparator nor flag value.
 
 		int cFlag -- Value will be used to decide on how to compare the user's input against the comparator
 			value. The cFlag value must be a value between 0 to 6, which is mapped to the flag enumerator.
-			IS OPTIONAL IF a Validator object is initialized without a comparator nor cFlag value.
+			IS OPTIONAL IF a Input object is initialized without a comparator nor cFlag value.
 			
 */
 
@@ -41,11 +41,11 @@
 #include <vector>
 #include "Flag.h"
 
-namespace AGB 
+namespace Validator 
 {
 
 	template <class type>
-	class Validator
+	class Input
 	{
 	private:
 
@@ -67,11 +67,11 @@ namespace AGB
 
 	public:
 		// Constructors
-		Validator();
-		Validator(std::string, std::string);
-		Validator(std::string, std::string, bool, bool);
-		Validator(std::string, std::string, type, Flag);
-		Validator(std::string, std::string, type, Flag, bool, bool);
+		Input();
+		Input(std::string, std::string);
+		Input(std::string, std::string, bool, bool);
+		Input(std::string, std::string, type, Flag);
+		Input(std::string, std::string, type, Flag, bool, bool);
 
 		// Mutators
 		void setUserPrompt(std::string);
@@ -87,7 +87,7 @@ namespace AGB
 		bool getWillPause();
 		bool getWillClear();
 
-		type getInput(); // Helper function which calls Validator::promptUser()
+		type getInput(); // Helper function which calls Input::promptUser()
 
 
 
@@ -95,21 +95,21 @@ namespace AGB
 
 	// MARK: -- Constructors
 	template <class type>
-	Validator<type>::Validator()
+	Input<type>::Input()
 	{
 		userPrompt = "";
 		invalidPrompt = "";
 	}
 
 	template <class type>
-	Validator<type>::Validator(std::string inUserPrompt, std::string inInvalidPrompt)
+	Input<type>::Input(std::string inUserPrompt, std::string inInvalidPrompt)
 	{
 		userPrompt = inUserPrompt;
 		invalidPrompt = inInvalidPrompt;
 	}
 
 	template <class type>
-	Validator<type>::Validator(std::string inUserPrompt, std::string inInvalidPrompt, bool inWillPause, bool inWillClear)
+	Input<type>::Input(std::string inUserPrompt, std::string inInvalidPrompt, bool inWillPause, bool inWillClear)
 	{
 		userPrompt = inUserPrompt;
 		invalidPrompt = inInvalidPrompt;
@@ -118,7 +118,7 @@ namespace AGB
 	}
 
 	template <class type>
-	Validator<type>::Validator(std::string inUserPrompt, std::string inInvalidPrompt, type inComparator, Flag inCFlag)
+	Input<type>::Input(std::string inUserPrompt, std::string inInvalidPrompt, type inComparator, Flag inCFlag)
 	{
 		userPrompt = inUserPrompt;
 		invalidPrompt = inInvalidPrompt;
@@ -127,7 +127,7 @@ namespace AGB
 	}
 
 	template <class type>
-	Validator<type>::Validator(std::string inUserPrompt, std::string inInvalidPrompt, type inComparator, Flag inCFlag, bool inWillPause, bool inWillClear)
+	Input<type>::Input(std::string inUserPrompt, std::string inInvalidPrompt, type inComparator, Flag inCFlag, bool inWillPause, bool inWillClear)
 	{
 		userPrompt = inUserPrompt;
 		invalidPrompt = inInvalidPrompt;
@@ -140,7 +140,7 @@ namespace AGB
 	// MARK: -- Private Methods
 
 	template <class type>
-	void Validator<type>::promptUser()
+	void Input<type>::promptUser()
 	{
 		do
 		{
@@ -187,67 +187,67 @@ namespace AGB
 
 	// MARK: -- Mutators
 	template <class type>
-	void Validator<type>::setUserPrompt(std::string inUserPrompt)
+	void Input<type>::setUserPrompt(std::string inUserPrompt)
 	{
 		userPrompt = inUserPrompt;
 	}
 
 	template <class type>
-	void Validator<type>::setInvalidPrompt(std::string inInvalidPrompt)
+	void Input<type>::setInvalidPrompt(std::string inInvalidPrompt)
 	{
 		invalidPrompt = inInvalidPrompt;
 	}
 
 	template <class type>
-	void Validator<type>::setIsValid(bool inIsValid)
+	void Input<type>::setIsValid(bool inIsValid)
 	{
 		isValid = inIsValid;
 	}
 	
 	template <class type>
-	void Validator<type>::setWillPause(bool inWillPause)
+	void Input<type>::setWillPause(bool inWillPause)
 	{
 		willPause = inWillPause;
 	}
 	template <class type>
-	void Validator<type>::setWillClear(bool inWillClear)
+	void Input<type>::setWillClear(bool inWillClear)
 	{
 		willClear = inWillClear;
 	}
 
 	// Mark: -- Accessors
 	template <class type>
-	std::string Validator<type>::getUserPrompt()
+	std::string Input<type>::getUserPrompt()
 	{
 		return userPrompt;
 	}
 
 	template <class type>
-	std::string Validator<type>::getInvalidPrompt()
+	std::string Input<type>::getInvalidPrompt()
 	{
 		return invalidPrompt;
 	}
 
 	template <class type>
-	bool Validator<type>::getIsValid()
+	bool Input<type>::getIsValid()
 	{
 		return isValid;
 	}
 
 	template <class type>
-	bool Validator<type>::getWillPause()
+	bool Input<type>::getWillPause()
 	{
 		return willPause;
 	}
 
 	template <class type>
-	bool Validator<type>::getWillClear()
+	bool Input<type>::getWillClear()
 	{
 		return willClear;
 	}
 
 	template <class type>
-	type Validator<type>::getInput()
+	type Input<type>::getInput()
 	{
 		promptUser();
 		return input;

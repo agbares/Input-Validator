@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="Validator.h" />
+    <ClInclude Include="Input.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

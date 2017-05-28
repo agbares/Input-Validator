@@ -1,6 +1,6 @@
 // Menu class -- Specification & Implementation
 // 
-// This is a basic child class of AGB::Validator that takes care of 
+// This is a basic child class of Validator::Input that takes care of 
 // user menu selection.
 //
 // This is intended for console based programs.
@@ -49,11 +49,11 @@ DEFAULT VALUE: true
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Validator.h"
+#include "Input.h"
 
-namespace AGB 
+namespace Validator 
 {
-	class Menu : public Validator<int>
+	class Menu : public Input<int>
 	{
 	private:
 
