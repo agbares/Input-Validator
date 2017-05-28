@@ -1,0 +1,12 @@
+#pragma once
+
+enum class Flag
+{
+	NONE = 0,
+	LESSTHAN,
+	LESSTHANEQ,
+	GREATERTHAN,
+	GREATERTHANEQ,
+	EQUAL,
+	NOTEQUAL
+};
