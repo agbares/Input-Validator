@@ -40,8 +40,6 @@
 #include <string>
 #include <vector>
 #include "Flag.h"
-#include "InvalidFlagExcep.h"
-#include "InvalidInputExcep.h"
 
 namespace AGB 
 {
