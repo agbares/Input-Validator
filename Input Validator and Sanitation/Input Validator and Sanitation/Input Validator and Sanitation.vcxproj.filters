@@ -15,23 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="InvalidFlagExcep.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InvalidInputExcep.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InvalidFlagExcep.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InvalidInputExcep.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Validator.h">
       <Filter>Header Files</Filter>
     </ClInclude>

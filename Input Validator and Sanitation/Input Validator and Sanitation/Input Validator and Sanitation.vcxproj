@@ -139,14 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InvalidFlagExcep.cpp" />
-    <ClCompile Include="InvalidInputExcep.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flag.h" />
-    <ClInclude Include="InvalidFlagExcep.h" />
-    <ClInclude Include="InvalidInputExcep.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Validator.h" />
   </ItemGroup>
