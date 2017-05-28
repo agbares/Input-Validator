@@ -1,3 +1,9 @@
+// Main.cpp
+//
+// Just a source file to test my classes
+//
+// Author: Antonio Garcia Bares Jr.
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -21,9 +27,7 @@ int main()
 
 	Validator::Menu inputSelection(menu, "\n\t**Invalid Input**\n");
 
-	//AGB::Validator<int> inputSelection(menu, "\n\t**Invalid Input**\n");
 	selection = inputSelection.getInput();
-
 
 	system("pause");
 	return 0;
