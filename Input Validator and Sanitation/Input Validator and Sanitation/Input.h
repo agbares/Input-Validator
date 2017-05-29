@@ -144,7 +144,7 @@ namespace Validator
 	{
 		do
 		{
-			std::cout << userPrompt << endl;
+			std::cout << userPrompt << std::endl;
 
 			std::cin >> input;
 
