@@ -25,7 +25,7 @@ int main()
 	menu.push_back("Steak");
 	menu.push_back("Fried Chicken");
 
-	Validator::Menu inputSelection(menu, "\n\t**Invalid Input**\n");
+	validator::Menu inputSelection(menu, "\n\t**Invalid Input**\n");
 
 	selection = inputSelection.getInput();
 

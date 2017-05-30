@@ -41,7 +41,7 @@
 #include <vector>
 #include "Flag.h"
 
-namespace Validator 
+namespace validator 
 {
 
 	template <class type>

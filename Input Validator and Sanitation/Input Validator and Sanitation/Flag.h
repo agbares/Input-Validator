@@ -6,7 +6,7 @@
 // Author: Antonio Garcia Bares Jr.
 
 #pragma once
-namespace Validator
+namespace validator
 {
 	enum class Flag
 	{

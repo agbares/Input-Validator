@@ -1,6 +1,6 @@
 // Menu class -- Specification & Implementation
 // 
-// This is a basic child class of Validator::Input that takes care of 
+// This is a basic child class of validator::Input that takes care of 
 // user menu selection.
 //
 // This is intended for console based programs.
@@ -12,7 +12,7 @@
 The class has the following properties that should be initialized:
 
 std::vector userMenu -- The menu that will be displayed to prompt the user for selection.
-The Validator can only have either userPrompt or userMenu, not both.
+The validator can only have either userPrompt or userMenu, not both.
 FORMAT:
 userMenu[0] - Should hold the text that will be displayed to prompt the user for input
 userMenu[n] - (Where n > 0) Should hold the text for the nth menu item
@@ -51,7 +51,7 @@ DEFAULT VALUE: true
 #include <string>
 #include "Input.h"
 
-namespace Validator 
+namespace validator 
 {
 	class Menu : public Input<int>
 	{
